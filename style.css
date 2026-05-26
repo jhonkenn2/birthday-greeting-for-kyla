@@ -655,7 +655,6 @@ body.wish-pending .night-motion {
 .ray-one { transform: rotate(-28deg); animation-delay: 0.1s; }
 .ray-two { transform: rotate(0deg); animation-delay: 0.7s; }
 .ray-three { transform: rotate(27deg); animation-delay: 1.2s; }
-}
 
 .letter-modal {
   position: fixed;
