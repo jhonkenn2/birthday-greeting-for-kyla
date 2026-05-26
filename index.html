@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday, Kyla</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <canvas id="confettiCanvas" aria-hidden="true"></canvas>
+
+  <button class="sound-toggle" id="soundToggle" type="button" aria-pressed="true" aria-label="Toggle sound">
+    <span aria-hidden="true">♪</span>
+  </button>
+
+  <main class="app" id="app">
+    <section class="scene welcome-scene is-active" id="welcomeScene" aria-labelledby="welcomeTitle">
+      <div class="floating-shapes" aria-hidden="true">
+        <span class="balloon balloon-one"></span>
+        <span class="balloon balloon-two"></span>
+        <span class="balloon balloon-three"></span>
+        <span class="sparkle sparkle-one"></span>
+        <span class="sparkle sparkle-two"></span>
+        <span class="sparkle sparkle-three"></span>
+      </div>
+
+      <div class="welcome-copy">
+        <p class="eyebrow">A little birthday surprise</p>
+        <h1 id="welcomeTitle">Happy Birthday, Kyla</h1>
+        <p class="lead">I made this tiny celebration just for you, filled with color, cake, and a message from my heart.</p>
+        <button class="primary-button" id="startButton" type="button">Start the surprise</button>
+      </div>
+    </section>
+
+    <section class="scene cake-scene" id="cakeScene" aria-labelledby="cakeTitle">
+      <div class="sprinkles" aria-hidden="true">
+        <span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span>
+      </div>
+
+      <div class="scene-header">
+        <h2 id="cakeTitle">make a wish</h2>
+        <p class="cake-hint">Tap the cake or press the button</p>
+      </div>
+
+      <div class="cake-stage" id="cakeStage">
+        <button class="cake-button" id="cakeButton" type="button" aria-label="Blow the candles by tapping the cake">
+          <div class="cake" aria-label="Birthday cake with lit candles">
+            <div class="number-candle" aria-hidden="true">
+              <span class="number-flame flame"></span>
+              <span class="number-stick" id="candleLabel">21</span>
+            </div>
+            <div class="cake-slice">
+              <div class="frosting-top"></div>
+              <div class="slice-face">
+                <span class="cake-stripe stripe-one"></span>
+                <span class="cake-stripe stripe-two"></span>
+              </div>
+            </div>
+            <div class="plate">
+              <span class="plate-loop loop-one"></span>
+              <span class="plate-loop loop-two"></span>
+              <span class="plate-loop loop-three"></span>
+              <span class="plate-loop loop-four"></span>
+            </div>
+          </div>
+        </button>
+      </div>
+
+      <button class="primary-button blow-button" id="blowButton" type="button">Blow the candles</button>
+    </section>
+  </main>
+
+  <div class="letter-modal" id="letterModal" role="dialog" aria-modal="true" aria-labelledby="cardTitle" hidden>
+    <div class="modal-glow" aria-hidden="true"></div>
+    <article class="card" id="birthdayCard">
+      <div class="card-sprinkles" aria-hidden="true">
+        <span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span>
+      </div>
+      <div class="card-inside">
+        <button class="close-letter" id="closeLetter" type="button" aria-label="Close letter">x</button>
+        <div class="mini-cake" aria-hidden="true">
+          <span class="mini-flame"></span>
+          <span class="mini-candle">21</span>
+          <span class="mini-frosting"></span>
+          <span class="mini-slice"></span>
+          <span class="mini-plate"></span>
+        </div>
+        <p class="eyebrow">My favorite person</p>
+        <h2 id="cardTitle">Happy Birthday, Kyla</h2>
+        <p id="cardMessage"></p>
+      </div>
+    </article>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
