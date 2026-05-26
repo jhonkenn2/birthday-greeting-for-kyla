@@ -11,6 +11,7 @@ const {
   cakeDesign,
   cardDesign,
   birthdaySong,
+  sceneEffects,
 } = require("../script.js");
 
 test("initial state starts at the welcome screen with candles lit", () => {
@@ -87,4 +88,11 @@ test("birthday song is configured for generated background playback", () => {
   assert.equal(birthdaySong.loop, true);
   assert.ok(birthdaySong.notes.length >= 20);
   assert.deepEqual(birthdaySong.notes.slice(0, 4).map((note) => note.pitch), ["G4", "G4", "A4", "G4"]);
+});
+
+test("cake scene has richer interactive motion effects configured", () => {
+  assert.equal(sceneEffects.movingBackground, true);
+  assert.equal(sceneEffects.pointerResponsiveCandleLight, true);
+  assert.ok(sceneEffects.layers.includes("drifting-sprinkles"));
+  assert.ok(sceneEffects.layers.includes("candle-light-rays"));
 });

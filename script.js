@@ -50,6 +50,12 @@ const birthdaySong = {
   ],
 };
 
+const sceneEffects = {
+  movingBackground: true,
+  pointerResponsiveCandleLight: true,
+  layers: ["drifting-sprinkles", "candle-light-rays", "twinkling-stars", "cake-hover-motion"],
+};
+
 function createInitialState() {
   return {
     screen: "welcome",
@@ -103,6 +109,7 @@ if (typeof module !== "undefined") {
     cakeDesign,
     cardDesign,
     birthdaySong,
+    sceneEffects,
   };
 }
 
@@ -119,6 +126,7 @@ if (typeof window !== "undefined") {
   const startButton = document.getElementById("startButton");
   const blowButton = document.getElementById("blowButton");
   const cakeButton = document.getElementById("cakeButton");
+  const cakeStage = document.getElementById("cakeStage");
   const cake = document.querySelector(".cake");
   const card = document.getElementById("birthdayCard");
   const letterModal = document.getElementById("letterModal");
@@ -308,6 +316,19 @@ if (typeof window !== "undefined") {
 
   blowButton.addEventListener("click", blowOutCandles);
   cakeButton.addEventListener("click", blowOutCandles);
+  cakeStage.addEventListener("pointermove", (event) => {
+    if (!state.candlesLit) return;
+    const rect = cakeStage.getBoundingClientRect();
+    const x = ((event.clientX - rect.left) / rect.width) * 100;
+    const y = ((event.clientY - rect.top) / rect.height) * 100;
+    cakeStage.style.setProperty("--light-x", `${x}%`);
+    cakeStage.style.setProperty("--light-y", `${y}%`);
+  });
+
+  cakeStage.addEventListener("pointerleave", () => {
+    cakeStage.style.setProperty("--light-x", "50%");
+    cakeStage.style.setProperty("--light-y", "28%");
+  });
 
   closeLetter.addEventListener("click", () => {
     state = {
