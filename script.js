@@ -60,6 +60,11 @@ const sceneEffects = {
   layers: ["drifting-sprinkles", "candle-light-rays", "twinkling-stars", "cake-hover-motion"],
 };
 
+const welcomeEffects = {
+  fallingConfetti: true,
+  layers: ["welcome-confetti", "glossy-balloons", "soft-sparkles"],
+};
+
 function createInitialState() {
   return {
     screen: "welcome",
@@ -114,6 +119,7 @@ if (typeof module !== "undefined") {
     cardDesign,
     birthdaySong,
     sceneEffects,
+    welcomeEffects,
   };
 }
 

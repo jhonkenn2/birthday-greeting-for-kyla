@@ -12,6 +12,7 @@ const {
   cardDesign,
   birthdaySong,
   sceneEffects,
+  welcomeEffects,
 } = require("../script.js");
 
 test("initial state starts at the welcome screen with candles lit", () => {
@@ -106,4 +107,10 @@ test("cake scene has richer interactive motion effects configured", () => {
   assert.equal(sceneEffects.pointerResponsiveCandleLight, true);
   assert.ok(sceneEffects.layers.includes("drifting-sprinkles"));
   assert.ok(sceneEffects.layers.includes("candle-light-rays"));
+});
+
+test("welcome screen has falling confetti and polished balloons configured", () => {
+  assert.equal(welcomeEffects.fallingConfetti, true);
+  assert.ok(welcomeEffects.layers.includes("welcome-confetti"));
+  assert.ok(welcomeEffects.layers.includes("glossy-balloons"));
 });

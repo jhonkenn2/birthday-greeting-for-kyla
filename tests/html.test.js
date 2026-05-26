@@ -10,3 +10,8 @@ test("welcome screen uses natural girlfriend-specific copy", () => {
   assert.doesNotMatch(html, /A little birthday surprise/i);
   assert.doesNotMatch(html, /I made this tiny celebration just for you/i);
 });
+
+test("welcome screen includes a falling confetti layer", () => {
+  assert.match(html, /class="welcome-confetti"/);
+  assert.match(html, /class="confetti-piece/);
+});
