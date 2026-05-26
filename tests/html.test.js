@@ -31,6 +31,7 @@ test("photo reveal modal appears before the letter modal in the markup", () => {
 test("photo reveal uses the playful biggest gift copy", () => {
   assert.match(html, /wait muna\.\.\./i);
   assert.match(html, /surprise, ako ang biggest gift mo/i);
-  assert.match(html, /ngayong birthday mo, unwrap me rawr/i);
+  assert.match(html, /and here's my kulangot, specially for you\. bwehehe/i);
   assert.doesNotMatch(html, /may picture muna/i);
+  assert.doesNotMatch(html, /unwrap me rawr/i);
 });
