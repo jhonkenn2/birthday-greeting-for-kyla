@@ -937,6 +937,201 @@ body.wish-pending .night-motion {
 .ray-two { transform: rotate(0deg); animation-delay: 0.7s; }
 .ray-three { transform: rotate(27deg); animation-delay: 1.2s; }
 
+.photo-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 26;
+  display: grid;
+  place-items: center;
+  padding: 1.25rem;
+  background:
+    radial-gradient(circle at 50% 24%, rgba(255, 245, 194, 0.34), transparent 18rem),
+    rgba(28, 11, 42, 0.42);
+  backdrop-filter: blur(12px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 520ms ease, transform 520ms ease;
+}
+
+.photo-modal.is-visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.photo-modal.is-leaving {
+  opacity: 0;
+  transform: scale(0.96) translateY(12px);
+  transition: opacity 1200ms ease, transform 1200ms ease;
+}
+
+.photo-modal[hidden] {
+  display: none;
+}
+
+.photo-modal-glow {
+  position: absolute;
+  width: min(760px, 94vw);
+  height: min(760px, 88vh);
+  border-radius: 44% 56% 52% 48%;
+  background:
+    radial-gradient(circle at 50% 45%, rgba(255, 209, 102, 0.58), rgba(255, 90, 163, 0.18) 38%, transparent 72%);
+  filter: blur(2px);
+  animation: glowPulse 2.4s ease-in-out infinite;
+}
+
+.photo-card {
+  width: min(430px, calc(100vw - 2rem));
+  position: relative;
+  z-index: 2;
+  padding: clamp(0.85rem, 3vw, 1.05rem);
+  border: 4px solid rgba(255, 255, 255, 0.7);
+  border-radius: 30px 24px 34px 26px;
+  color: #47233a;
+  background:
+    radial-gradient(circle at 14% 8%, rgba(255, 209, 102, 0.24), transparent 5rem),
+    linear-gradient(180deg, rgba(255, 250, 238, 0.98), rgba(255, 236, 248, 0.98));
+  box-shadow:
+    0 30px 80px rgba(17, 7, 28, 0.34),
+    inset 0 0 0 2px rgba(255, 255, 255, 0.55);
+  text-align: center;
+  transform: rotate(-1.2deg);
+  animation: photoFloat 3.8s ease-in-out infinite;
+}
+
+.photo-card::before {
+  content: "";
+  position: absolute;
+  left: -4%;
+  right: -4%;
+  top: -18px;
+  height: 78px;
+  border-radius: 30px 30px 0 0;
+  background:
+    radial-gradient(circle at 10% 100%, #ff78b8 0 18px, transparent 19px),
+    radial-gradient(circle at 24% 96%, #ff78b8 0 20px, transparent 21px),
+    radial-gradient(circle at 42% 102%, #ff78b8 0 19px, transparent 20px),
+    radial-gradient(circle at 62% 96%, #ff78b8 0 20px, transparent 21px),
+    radial-gradient(circle at 82% 100%, #ff78b8 0 18px, transparent 19px),
+    #ff5aa3;
+  transform: rotate(1.5deg);
+  z-index: -1;
+}
+
+.photo-frame {
+  position: relative;
+  overflow: hidden;
+  border: 7px solid #fffdf8;
+  border-radius: 24px 18px 26px 20px;
+  background: #fff7de;
+  box-shadow: 0 18px 34px rgba(122, 42, 82, 0.22);
+}
+
+.photo-frame::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(110deg, rgba(255, 255, 255, 0.32), transparent 36%),
+    radial-gradient(circle at 18% 16%, rgba(255, 255, 255, 0.3), transparent 4rem);
+  pointer-events: none;
+}
+
+.photo-frame img {
+  display: block;
+  width: 100%;
+  max-height: min(58vh, 620px);
+  object-fit: cover;
+}
+
+.photo-eyebrow {
+  margin: 1rem 0 0.35rem;
+  color: var(--hot-pink);
+  font-size: 0.82rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.photo-card h2 {
+  color: #2f4850;
+  font-family: "Brush Script MT", "Segoe Script", cursive;
+  font-size: clamp(2.35rem, 9vw, 4rem);
+  line-height: 0.86;
+  transform: rotate(-4deg);
+}
+
+.photo-caption {
+  width: min(340px, 100%);
+  margin: 0.85rem auto 0;
+  font-size: 0.98rem;
+  line-height: 1.45;
+}
+
+.photo-heart {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  background: #ff5aa3;
+  transform: rotate(45deg);
+  filter: drop-shadow(0 0 16px rgba(255, 90, 163, 0.56));
+  animation: photoHeartRise 3.4s ease-in-out infinite;
+}
+
+.photo-heart::before,
+.photo-heart::after {
+  content: "";
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: inherit;
+}
+
+.photo-heart::before {
+  left: -12px;
+}
+
+.photo-heart::after {
+  top: -12px;
+}
+
+.photo-heart-one {
+  left: -8px;
+  top: 22%;
+}
+
+.photo-heart-two {
+  right: -10px;
+  top: 58%;
+  background: #ffd166;
+  scale: 0.72;
+  animation-delay: 1.1s;
+}
+
+.photo-sprinkles {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.photo-sprinkles span {
+  position: absolute;
+  width: 26px;
+  height: 6px;
+  border-radius: 999px;
+  background: #ff4b13;
+  animation: sprinkleDrift 6.4s ease-in-out infinite;
+}
+
+.photo-sprinkles span:nth-child(1) { left: 18%; top: 18%; transform: rotate(15deg); }
+.photo-sprinkles span:nth-child(2) { right: 17%; top: 22%; background: #ffd166; transform: rotate(-20deg); animation-delay: 0.4s; }
+.photo-sprinkles span:nth-child(3) { left: 10%; bottom: 20%; background: #ff78b8; transform: rotate(-12deg); animation-delay: 0.9s; }
+.photo-sprinkles span:nth-child(4) { right: 12%; bottom: 24%; background: #e8c4ff; transform: rotate(25deg); animation-delay: 1.3s; }
+.photo-sprinkles span:nth-child(5) { left: 34%; top: 76%; background: #ffc7b0; transform: rotate(8deg); animation-delay: 0.7s; }
+.photo-sprinkles span:nth-child(6) { right: 32%; top: 12%; background: #ff78b8; transform: rotate(-8deg); animation-delay: 1.1s; }
+.photo-sprinkles span:nth-child(7) { left: 46%; bottom: 8%; background: #ffd166; transform: rotate(31deg); animation-delay: 1.6s; }
+.photo-sprinkles span:nth-child(8) { right: 43%; top: 30%; background: #ffc7b0; transform: rotate(16deg); animation-delay: 0.2s; }
+
 .letter-modal {
   position: fixed;
   inset: 0;
@@ -1328,6 +1523,24 @@ body.wish-pending .night-motion {
   50% { opacity: 1; transform: scale(1.04); }
 }
 
+@keyframes photoFloat {
+  0%, 100% { translate: 0 0; }
+  50% { translate: 0 -8px; }
+}
+
+@keyframes photoHeartRise {
+  0%, 100% {
+    opacity: 0.48;
+    translate: 0 10px;
+    rotate: 0deg;
+  }
+  50% {
+    opacity: 1;
+    translate: 0 -16px;
+    rotate: 8deg;
+  }
+}
+
 @keyframes paperPop {
   0% { transform: translateY(28px) rotate(-0.7deg) scale(0.94); }
   70% { transform: translateY(-4px) rotate(-0.7deg) scale(1.01); }
@@ -1368,6 +1581,15 @@ body.wish-pending .night-motion {
 
   .card {
     width: min(360px, calc(100vw - 1.2rem));
+  }
+
+  .photo-card {
+    width: min(340px, calc(100vw - 1.2rem));
+    border-radius: 24px 20px 28px 22px;
+  }
+
+  .photo-frame img {
+    max-height: 48vh;
   }
 
   .card-inside {

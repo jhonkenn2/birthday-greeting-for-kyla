@@ -6,10 +6,12 @@ const {
   startExperience,
   blowCandles,
   openCard,
+  completePhotoReveal,
   toggleSound,
   greeting,
   cakeDesign,
   cardDesign,
+  photoReveal,
   birthdaySong,
   sceneEffects,
   welcomeEffects,
@@ -20,6 +22,8 @@ test("initial state starts at the welcome screen with candles lit", () => {
     screen: "welcome",
     candlesLit: true,
     cardOpen: false,
+    photoOpen: false,
+    photoClosing: false,
     celebrating: false,
     sceneLit: false,
     soundEnabled: true,
@@ -41,16 +45,25 @@ test("blowCandles extinguishes flames and starts celebration", () => {
   assert.equal(state.celebrating, true);
 });
 
-test("blowCandles lights the room and opens the letter modal", () => {
+test("blowCandles lights the room and opens the photo reveal before the letter", () => {
   const state = blowCandles(startExperience(createInitialState()));
 
   assert.equal(state.sceneLit, true);
-  assert.equal(state.cardOpen, true);
+  assert.equal(state.photoOpen, true);
+  assert.equal(state.cardOpen, false);
 });
 
 test("openCard marks the greeting card as open", () => {
   const state = openCard(createInitialState());
 
+  assert.equal(state.cardOpen, true);
+});
+
+test("completePhotoReveal hides the photo and opens the letter modal", () => {
+  const state = completePhotoReveal(blowCandles(startExperience(createInitialState())));
+
+  assert.equal(state.photoOpen, false);
+  assert.equal(state.photoClosing, false);
   assert.equal(state.cardOpen, true);
 });
 
@@ -93,6 +106,13 @@ test("cake interaction uses a subtle tap-only call to action", () => {
 test("card design matches the hand drawn cake style", () => {
   assert.equal(cardDesign.theme, "hand-drawn-cake");
   assert.equal(cardDesign.accent, "pink-frosting");
+});
+
+test("photo reveal is configured before the letter modal", () => {
+  assert.equal(photoReveal.imageSrc, "assets/images/kyla-photo.jpg");
+  assert.equal(photoReveal.durationMs, 5000);
+  assert.ok(photoReveal.fadeMs >= 1000);
+  assert.equal(photoReveal.nextModal, "letter");
 });
 
 test("birthday song is configured for generated background playback", () => {

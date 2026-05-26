@@ -21,6 +21,13 @@ const cardDesign = {
   accent: "pink-frosting",
 };
 
+const photoReveal = {
+  imageSrc: "assets/images/kyla-photo.jpg",
+  durationMs: 5000,
+  fadeMs: 1200,
+  nextModal: "letter",
+};
+
 const birthdaySong = {
   title: "Happy Birthday",
   loop: true,
@@ -71,6 +78,8 @@ function createInitialState() {
     screen: "welcome",
     candlesLit: true,
     cardOpen: false,
+    photoOpen: false,
+    photoClosing: false,
     celebrating: false,
     sceneLit: false,
     soundEnabled: true,
@@ -88,9 +97,28 @@ function blowCandles(state) {
   return {
     ...state,
     candlesLit: false,
-    cardOpen: true,
+    cardOpen: false,
+    photoOpen: true,
+    photoClosing: false,
     celebrating: true,
     sceneLit: true,
+  };
+}
+
+function startPhotoFade(state) {
+  return {
+    ...state,
+    photoOpen: true,
+    photoClosing: true,
+  };
+}
+
+function completePhotoReveal(state) {
+  return {
+    ...state,
+    photoOpen: false,
+    photoClosing: false,
+    cardOpen: true,
   };
 }
 
@@ -98,6 +126,8 @@ function openCard(state) {
   return {
     ...state,
     cardOpen: true,
+    photoOpen: false,
+    photoClosing: false,
   };
 }
 
@@ -113,11 +143,14 @@ if (typeof module !== "undefined") {
     createInitialState,
     startExperience,
     blowCandles,
+    startPhotoFade,
+    completePhotoReveal,
     openCard,
     toggleSound,
     greeting,
     cakeDesign,
     cardDesign,
+    photoReveal,
     birthdaySong,
     sceneEffects,
     welcomeEffects,
@@ -128,6 +161,8 @@ if (typeof window !== "undefined") {
   let state = createInitialState();
   let audioContext;
   let birthdaySongTimer;
+  let photoRevealTimer;
+  let photoFadeTimer;
   let birthdaySongPlaying = false;
   let confettiPieces = [];
   let confettiAnimation;
@@ -139,6 +174,8 @@ if (typeof window !== "undefined") {
   const cakeStage = document.getElementById("cakeStage");
   const cake = document.querySelector(".cake");
   const card = document.getElementById("birthdayCard");
+  const photoModal = document.getElementById("photoModal");
+  const photoRevealImage = document.getElementById("photoRevealImage");
   const letterModal = document.getElementById("letterModal");
   const closeLetter = document.getElementById("closeLetter");
   const cardMessage = document.getElementById("cardMessage");
@@ -149,13 +186,19 @@ if (typeof window !== "undefined") {
 
   cardMessage.textContent = greeting.message;
   candleLabel.textContent = cakeDesign.candleLabel;
+  photoRevealImage.src = photoReveal.imageSrc;
 
   function render() {
+    const photoVisible = state.photoOpen || state.photoClosing;
+
     welcomeScene.classList.toggle("is-active", state.screen === "welcome");
     cakeScene.classList.toggle("is-active", state.screen === "cake");
     document.body.classList.toggle("wish-pending", state.screen === "cake" && !state.sceneLit);
     document.body.classList.toggle("wish-lit", state.sceneLit);
     cake.classList.toggle("candles-out", !state.candlesLit);
+    photoModal.hidden = !photoVisible;
+    photoModal.classList.toggle("is-visible", photoVisible);
+    photoModal.classList.toggle("is-leaving", state.photoClosing);
     letterModal.hidden = !state.cardOpen;
     letterModal.classList.toggle("is-visible", state.cardOpen);
     card.classList.toggle("is-visible", state.cardOpen);
@@ -309,6 +352,20 @@ if (typeof window !== "undefined") {
     playChime();
   }
 
+  function schedulePhotoReveal() {
+    window.clearTimeout(photoRevealTimer);
+    window.clearTimeout(photoFadeTimer);
+    photoRevealTimer = window.setTimeout(() => {
+      state = startPhotoFade(state);
+      render();
+
+      photoFadeTimer = window.setTimeout(() => {
+        state = completePhotoReveal(state);
+        render();
+      }, photoReveal.fadeMs);
+    }, photoReveal.durationMs);
+  }
+
   startButton.addEventListener("click", () => {
     state = startExperience(state);
     render();
@@ -321,6 +378,7 @@ if (typeof window !== "undefined") {
     state = blowCandles(state);
     render();
     celebrate();
+    schedulePhotoReveal();
   }
 
   cakeButton.addEventListener("click", blowOutCandles);

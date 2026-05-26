@@ -20,3 +20,10 @@ test("cake hint appears below the cake stage with shooting stars in the scene", 
   assert.match(html, /class="shooting-stars"/);
   assert.ok(html.indexOf('class="cake-stage"') < html.indexOf('class="cake-hint"'));
 });
+
+test("photo reveal modal appears before the letter modal in the markup", () => {
+  assert.match(html, /id="photoModal"/);
+  assert.match(html, /id="photoRevealImage"/);
+  assert.match(html, /assets\/images\/kyla-photo\.jpg/);
+  assert.ok(html.indexOf('id="photoModal"') < html.indexOf('id="letterModal"'));
+});
