@@ -15,3 +15,8 @@ test("welcome screen includes a falling confetti layer", () => {
   assert.match(html, /class="welcome-confetti"/);
   assert.match(html, /class="confetti-piece/);
 });
+
+test("cake hint appears below the cake stage with shooting stars in the scene", () => {
+  assert.match(html, /class="shooting-stars"/);
+  assert.ok(html.indexOf('class="cake-stage"') < html.indexOf('class="cake-hint"'));
+});

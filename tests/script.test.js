@@ -105,8 +105,10 @@ test("birthday song is configured for generated background playback", () => {
 test("cake scene has richer interactive motion effects configured", () => {
   assert.equal(sceneEffects.movingBackground, true);
   assert.equal(sceneEffects.pointerResponsiveCandleLight, true);
+  assert.equal(sceneEffects.largerWishTitle, true);
   assert.ok(sceneEffects.layers.includes("drifting-sprinkles"));
   assert.ok(sceneEffects.layers.includes("candle-light-rays"));
+  assert.ok(sceneEffects.layers.includes("shooting-stars"));
 });
 
 test("welcome screen has falling confetti and polished balloons configured", () => {

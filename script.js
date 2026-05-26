@@ -57,7 +57,8 @@ const birthdaySong = {
 const sceneEffects = {
   movingBackground: true,
   pointerResponsiveCandleLight: true,
-  layers: ["drifting-sprinkles", "candle-light-rays", "twinkling-stars", "cake-hover-motion"],
+  largerWishTitle: true,
+  layers: ["drifting-sprinkles", "candle-light-rays", "twinkling-stars", "shooting-stars", "cake-hover-motion"],
 };
 
 const welcomeEffects = {
