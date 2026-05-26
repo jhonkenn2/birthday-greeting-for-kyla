@@ -10,6 +10,8 @@ const greeting = {
 
 const cakeDesign = {
   candleLabel: "21",
+  floatingHearts: true,
+  details: ["frosting-drips", "fruit-dots", "cream-highlights"],
 };
 
 const cardDesign = {

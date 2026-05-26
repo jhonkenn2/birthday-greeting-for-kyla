@@ -78,6 +78,12 @@ test("cake design uses a 21 number candle", () => {
   assert.equal(cakeDesign.candleLabel, "21");
 });
 
+test("cake design includes floating hearts and richer frosting details", () => {
+  assert.equal(cakeDesign.floatingHearts, true);
+  assert.ok(cakeDesign.details.includes("frosting-drips"));
+  assert.ok(cakeDesign.details.includes("fruit-dots"));
+});
+
 test("card design matches the hand drawn cake style", () => {
   assert.equal(cardDesign.theme, "hand-drawn-cake");
   assert.equal(cardDesign.accent, "pink-frosting");

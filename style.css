@@ -341,6 +341,74 @@ body.wish-lit .cake-button {
   animation: cakeFloat 4.5s ease-in-out infinite;
 }
 
+.floating-hearts {
+  position: absolute;
+  inset: -42px 0 auto;
+  height: 120px;
+  z-index: 7;
+  pointer-events: none;
+}
+
+.heart {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  background: #ff5aa3;
+  opacity: 0.9;
+  transform: rotate(45deg);
+  filter: drop-shadow(0 0 14px rgba(255, 90, 163, 0.55));
+  animation: heartFloat 4.2s ease-in-out infinite;
+}
+
+.heart::before,
+.heart::after {
+  content: "";
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: inherit;
+}
+
+.heart::before {
+  left: -11px;
+}
+
+.heart::after {
+  top: -11px;
+}
+
+.heart-one {
+  left: 24%;
+  top: 18px;
+  scale: 0.78;
+  animation-delay: 0.1s;
+}
+
+.heart-two {
+  right: 25%;
+  top: 10px;
+  background: #ffd166;
+  scale: 0.62;
+  animation-delay: 0.8s;
+}
+
+.heart-three {
+  left: 12%;
+  top: 74px;
+  background: #ff8fab;
+  scale: 0.55;
+  animation-delay: 1.4s;
+}
+
+.heart-four {
+  right: 13%;
+  top: 64px;
+  background: #ffc7d8;
+  scale: 0.7;
+  animation-delay: 2s;
+}
+
 .cake.celebrate {
   animation: cakeBounce 700ms ease;
 }
@@ -428,6 +496,7 @@ body.wish-lit .cake-button {
   width: min(260px, 64vw);
   height: 172px;
   z-index: 2;
+  filter: drop-shadow(0 22px 24px rgba(94, 41, 52, 0.18));
 }
 
 .cake-slice::after {
@@ -437,7 +506,9 @@ body.wish-lit .cake-button {
   top: 0;
   width: 92px;
   height: 172px;
-  background: #ffbf91;
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.18), transparent 45%),
+    #ffbf91;
   clip-path: polygon(0 0, 100% 36%, 0 100%);
   filter: brightness(1.03);
 }
@@ -448,7 +519,9 @@ body.wish-lit .cake-button {
   width: 100%;
   height: 62px;
   border-radius: 26px 18px 0 0;
-  background: #ff5aa3;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.28), transparent 45%),
+    #ff5aa3;
   clip-path: polygon(0 0, 100% 0, 100% 42%, 0 100%);
   z-index: 3;
 }
@@ -468,11 +541,26 @@ body.wish-lit .cake-button {
     #ff5aa3;
 }
 
+.frosting-top::after {
+  content: "";
+  position: absolute;
+  left: 10px;
+  top: 16px;
+  width: 150px;
+  height: 24px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.38), transparent);
+  transform: rotate(-5deg);
+}
+
 .slice-face {
   position: absolute;
   inset: 34px 0 0;
   border-radius: 0 0 10px 10px;
-  background: #ffc093;
+  background:
+    radial-gradient(circle at 18% 28%, rgba(255, 255, 255, 0.32), transparent 1.1rem),
+    radial-gradient(circle at 68% 70%, rgba(255, 255, 255, 0.18), transparent 1.4rem),
+    #ffc093;
   box-shadow:
     inset 0 0 0 2px rgba(255, 132, 171, 0.1),
     0 20px 28px rgba(117, 43, 55, 0.16);
@@ -486,6 +574,7 @@ body.wish-lit .cake-button {
   height: 9px;
   background: #f45a97;
   border-radius: 999px;
+  box-shadow: 0 2px 0 rgba(255, 255, 255, 0.24);
 }
 
 .stripe-one {
@@ -494,6 +583,54 @@ body.wish-lit .cake-button {
 
 .stripe-two {
   top: 106px;
+}
+
+.fruit-dot {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #ff4f93;
+  box-shadow:
+    0 0 0 4px rgba(255, 255, 255, 0.16),
+    0 6px 10px rgba(122, 42, 82, 0.16);
+}
+
+.dot-one {
+  left: 34px;
+  top: 26px;
+}
+
+.dot-two {
+  right: 42px;
+  top: 70px;
+  background: #ffd166;
+}
+
+.dot-three {
+  left: 112px;
+  bottom: 20px;
+  background: #ff8fab;
+}
+
+.cream-shine {
+  position: absolute;
+  width: 42px;
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.38);
+  transform: rotate(-7deg);
+}
+
+.shine-one {
+  left: 28px;
+  top: 86px;
+}
+
+.shine-two {
+  right: 38px;
+  top: 28px;
+  width: 32px;
 }
 
 .icing-top {
@@ -939,6 +1076,23 @@ body.wish-pending .night-motion {
 @keyframes cakeFloat {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-8px); }
+}
+
+@keyframes heartFloat {
+  0%, 100% {
+    opacity: 0.55;
+    translate: 0 10px;
+    rotate: 45deg;
+  }
+  45% {
+    opacity: 1;
+    translate: 0 -18px;
+    rotate: 38deg;
+  }
+  70% {
+    translate: 6px -26px;
+    rotate: 52deg;
+  }
 }
 
 @keyframes candleSway {
