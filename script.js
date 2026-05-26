@@ -12,6 +12,8 @@ const cakeDesign = {
   candleLabel: "21",
   floatingHearts: true,
   details: ["frosting-drips", "fruit-dots", "cream-highlights"],
+  ctaLabel: "tap the cake",
+  showBlowButton: false,
 };
 
 const cardDesign = {
@@ -126,7 +128,6 @@ if (typeof window !== "undefined") {
   const welcomeScene = document.getElementById("welcomeScene");
   const cakeScene = document.getElementById("cakeScene");
   const startButton = document.getElementById("startButton");
-  const blowButton = document.getElementById("blowButton");
   const cakeButton = document.getElementById("cakeButton");
   const cakeStage = document.getElementById("cakeStage");
   const cake = document.querySelector(".cake");
@@ -153,9 +154,8 @@ if (typeof window !== "undefined") {
     card.classList.toggle("is-visible", state.cardOpen);
     card.classList.toggle("is-open", state.cardOpen);
     soundToggle.setAttribute("aria-pressed", String(state.soundEnabled));
-    blowButton.disabled = !state.candlesLit;
     cakeButton.disabled = !state.candlesLit;
-    blowButton.textContent = state.candlesLit ? "Blow the candles" : "Wish sent";
+    cakeButton.setAttribute("aria-label", state.candlesLit ? "Tap the cake to make a wish" : "Wish sent");
   }
 
   function playTone(frequency, duration, delay = 0) {
@@ -316,7 +316,6 @@ if (typeof window !== "undefined") {
     celebrate();
   }
 
-  blowButton.addEventListener("click", blowOutCandles);
   cakeButton.addEventListener("click", blowOutCandles);
   cakeStage.addEventListener("pointermove", (event) => {
     if (!state.candlesLit) return;

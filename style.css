@@ -263,11 +263,18 @@ body.wish-pending .cake-scene h2 {
 }
 
 .cake-hint {
-  margin: 1.4rem 0 0;
+  margin: 1.1rem 0 0;
   color: inherit;
-  font-size: 0.9rem;
-  font-weight: 800;
-  opacity: 0.72;
+  font-size: 0.78rem;
+  font-weight: 700;
+  opacity: 0.46;
+  text-transform: lowercase;
+  transition: opacity 180ms ease, transform 180ms ease;
+}
+
+.cake-stage:hover + .cake-hint,
+.cake-hint:hover {
+  opacity: 0.7;
 }
 
 .scene-header {

@@ -84,6 +84,11 @@ test("cake design includes floating hearts and richer frosting details", () => {
   assert.ok(cakeDesign.details.includes("fruit-dots"));
 });
 
+test("cake interaction uses a subtle tap-only call to action", () => {
+  assert.equal(cakeDesign.ctaLabel, "tap the cake");
+  assert.equal(cakeDesign.showBlowButton, false);
+});
+
 test("card design matches the hand drawn cake style", () => {
   assert.equal(cardDesign.theme, "hand-drawn-cake");
   assert.equal(cardDesign.accent, "pink-frosting");
