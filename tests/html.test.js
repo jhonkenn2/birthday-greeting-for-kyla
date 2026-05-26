@@ -27,3 +27,10 @@ test("photo reveal modal appears before the letter modal in the markup", () => {
   assert.match(html, /assets\/images\/kyla-photo\.jpg/);
   assert.ok(html.indexOf('id="photoModal"') < html.indexOf('id="letterModal"'));
 });
+
+test("photo reveal uses the playful biggest gift copy", () => {
+  assert.match(html, /wait muna\.\.\./i);
+  assert.match(html, /surprise, ako ang biggest gift mo/i);
+  assert.match(html, /ngayong birthday mo, unwrap me rawr/i);
+  assert.doesNotMatch(html, /may picture muna/i);
+});
